@@ -1,0 +1,138 @@
+.Header {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  grid-template-areas:
+    "logo title edit"
+    ". description .";
+  gap: 0.8em 0.5em;
+  padding: 1.5em 0;
+}
+
+.Header-logo {
+  grid-area: logo;
+}
+
+.Header-title {
+  grid-area: title;
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+.Header-edit {
+  grid-area: edit;
+}
+
+.Header-logo,
+.Header-edit {
+  height: 50%;
+}
+
+.Header-description {
+  grid-area: description;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.TaskCard {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas: "TaskCardIcon TaskCardTitle TaskCardStatus";
+  align-items: center;
+  gap: 0 1.2em;
+  border-radius: 1em;
+  padding: 0.8em 1em;
+  background-color: #e3e8ef;
+}
+
+.TaskCard-icon,
+.TaskCard-status {
+  border-radius: 0.8em;
+  padding: 0.8em;
+}
+
+.TaskCard-icon {
+  grid-area: TaskCardIcon;
+  background-color: #fff;
+  width: fit-content;
+  align-self: self-start;
+}
+
+.TaskCard-content {
+  grid-area: TaskCardTitle;
+  align-self: self-start;
+  margin-top: 0.5em;
+  padding: 0 1em 0 0;
+}
+
+.TaskCard-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.TaskCard-description {
+  font-size: 1em;
+  font-weight: 400;
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+  margin-right: 8em;
+}
+
+.TaskCard-status {
+  grid-area: TaskCardStatus;
+  background-color: #e9a23b;
+  width: fit-content;
+}
+
+.TaskCard__inprogress {
+  background-color: #f5d565;
+}
+
+.TaskCard__inprogress .TaskCard-status {
+  background-color: #e9a23b;
+}
+
+.TaskCard__completed .TaskCard-status {
+  background-color: #32d657;
+}
+
+.TaskCard__wontdo .TaskCard-status {
+  background-color: #dd524c;
+}
+
+.TaskCard__completed {
+  background-color: #a0ecb1;
+}
+
+.TaskCard__wontdo {
+  background-color: #f7d4d3;
+}
+
+.IndexPage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2em 0;
+}
+
+.IndexPage-addtask {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas: "TaskCardIcon TaskCardTitle TaskCardStatus";
+  align-items: center;
+  gap: 0 1.4em;
+  border-radius: 1em;
+  padding: 0.8em 1em;
+  background-color: #f5e8d5;
+}
+
+.IndexPage-addtask__icon {
+  border-radius: 0.8em;
+  padding: 0.8em;
+  background-color: #e9a23b;
+}
+
+.IndexPage-addtask__title {
+  font-size: 1rem;
+  font-weight: 600;
+  grid-area: TaskCardTitle;
+}

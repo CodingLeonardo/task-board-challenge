@@ -1,39 +1,3 @@
-.Header {
-  display: grid;
-  justify-content: start;
-  align-items: center;
-  grid-template-areas:
-    "logo title edit"
-    ". description .";
-  gap: 0.8em 0.5em;
-  padding: 1.5em 0;
-}
-
-.Header-logo {
-  grid-area: logo;
-}
-
-.Header-title {
-  grid-area: title;
-  font-size: 2.5rem;
-  font-weight: normal;
-}
-
-.Header-edit {
-  grid-area: edit;
-}
-
-.Header-logo,
-.Header-edit {
-  height: 50%;
-}
-
-.Header-description {
-  grid-area: description;
-  font-size: 1rem;
-  font-weight: normal;
-}
-
 .TaskCard {
   display: grid;
   grid-template-columns: max-content 1fr max-content;
@@ -106,33 +70,4 @@
 
 .TaskCard__wontdo {
   background-color: #f7d4d3;
-}
-
-.IndexPage {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2em 0;
-}
-
-.IndexPage-addtask {
-  display: grid;
-  grid-template-columns: max-content 1fr max-content;
-  grid-template-areas: "TaskCardIcon TaskCardTitle TaskCardStatus";
-  align-items: center;
-  gap: 0 1.4em;
-  border-radius: 1em;
-  padding: 0.8em 1em;
-  background-color: #f5e8d5;
-}
-
-.IndexPage-addtask__icon {
-  border-radius: 0.8em;
-  padding: 0.8em;
-  background-color: #e9a23b;
-}
-
-.IndexPage-addtask__title {
-  font-size: 1rem;
-  font-weight: 600;
-  grid-area: TaskCardTitle;
 }

@@ -1,0 +1,35 @@
+.Header {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  grid-template-areas:
+    "logo title edit"
+    ". description .";
+  gap: 0.8em 0.5em;
+  padding: 1.5em 0;
+}
+
+.Header-logo {
+  grid-area: logo;
+}
+
+.Header-title {
+  grid-area: title;
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+.Header-edit {
+  grid-area: edit;
+}
+
+.Header-logo,
+.Header-edit {
+  height: 50%;
+}
+
+.Header-description {
+  grid-area: description;
+  font-size: 1rem;
+  font-weight: normal;
+}

@@ -1,0 +1,28 @@
+.IndexPage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2em 0;
+}
+
+.IndexPage-addtask {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-areas: "TaskCardIcon TaskCardTitle TaskCardStatus";
+  align-items: center;
+  gap: 0 1.4em;
+  border-radius: 1em;
+  padding: 0.8em 1em;
+  background-color: #f5e8d5;
+}
+
+.IndexPage-addtask__icon {
+  border-radius: 0.8em;
+  padding: 0.8em;
+  background-color: #e9a23b;
+}
+
+.IndexPage-addtask__title {
+  font-size: 1rem;
+  font-weight: 600;
+  grid-area: TaskCardTitle;
+}

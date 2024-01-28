@@ -1,18 +1,21 @@
+import { useState } from "react"
 import Header from "../components/Header"
 import Tasks from "../components/Tasks"
+import TaskEdit from "../components/TaskEdit"
 
 import Close from "../assets/close_ring_duotone.svg"
-
 import "./styles/IndexPage.css"
 
 const IndexPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <div className="container">
         <Header />
         <section className="IndexPage">
           <Tasks />
-          <div className="IndexPage-addtask">
+          <div className="IndexPage-addtask" onClick={() => setShowModal(true)}>
             <figure className="IndexPage-addtask__icon">
               <img src={Close} alt="" />
             </figure>
@@ -20,6 +23,7 @@ const IndexPage = () => {
           </div>
         </section>
       </div>
+      { showModal && <TaskEdit />}
     </>
   )
 }

@@ -1,0 +1,241 @@
+.modal {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1em;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.TaskEdit {
+  position: relative;
+  grid-area: 1 / 2;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 1em;
+  overflow: hidden;
+  padding: 1em 1.5em;
+}
+
+.TaskEdit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.TaskEdit-header__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.TaskEdit-header__close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e3e8ef;
+  border-radius: 0.5em;
+  padding: 0.5em;
+}
+
+.TaskEdit-header__close img {
+  background-color: #f5e8d5;
+  border-radius: 2em;
+  width: 1.1em;
+}
+
+.TaskEdit-name {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.TaskEdit-name label,
+.TaskEdit-description label,
+.TaskEdit-icon__title,
+.TaskEdit-status__title {
+  color: #97a3b6;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.4em;
+}
+
+.TaskEdit-name input[type="text"] {
+  background-color: #fff;
+  color: #97a3b6;
+  font-size: 1.15rem;
+  padding: 0.5em 1em;
+  border: 2px solid #e3e8ef;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+.TaskEdit-name input[type="text"]:focus,
+.TaskEdit-description textarea:focus {
+  border: 2px solid #3662e3;
+}
+
+.TaskEdit-description {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.TaskEdit-description textarea {
+  background-color: #fff;
+  color: #97a3b6;
+  font-size: 1.15rem;
+  padding: 0.5em 1em;
+  border: 2px solid #e3e8ef;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+.TaskEdit-icon {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.TaskEdit-icon__items {
+  display: flex;
+  flex-direction: row;
+  gap: 0 0.8em;
+}
+
+.TaskEdit-icon__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.8em;
+  height: 2.8em;
+}
+
+.TaskEdit-icon__item input[type="radio"] {
+  position: relative;
+  background-color: #e3e8ef;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  border-radius: 0.8em;
+  cursor: pointer;
+}
+
+.TaskEdit-icon__item input[type="radio"]:focus {
+  background-color: #f5d565;
+}
+
+.TaskEdit-icon__item label {
+  position: absolute;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.TaskEdit-status {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.TaskEdit-status__items {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.TaskEdit-status__item {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  gap: 0 0.8em;
+  padding: 0.1em;
+  border: 2px solid #e3e8ef;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.TaskEdit-status__item figure {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9a23b;
+  border-radius: 0.8em;
+}
+
+.TaskEdit-status__item img {
+  padding: 0.8em;
+}
+
+.TaskEdit-status__item h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.TaskEdit-status__item input[type="radio"] {
+  appearance: none;
+  width: 1.8em;
+  height: 1.8em;
+  margin-right: 0.8em;
+}
+
+.TaskEdit-status__item input[type="radio"]:checked {
+  background-image: url(../../assets/Done_round.svg);
+  background-size: 1.2em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #3662e3;
+  border-radius: 5em;
+}
+
+.TaskEdit-status__item:focus-within {
+  border: 2px solid #3662e3;
+}
+
+.TaskEdit-status__item.inprogress figure {
+  background-color: #e9a23b;
+}
+
+.TaskEdit-status__item.completed figure {
+  background-color: #32d657;
+}
+
+.TaskEdit-status__item.wontdo figure {
+  background-color: #dd524c;
+}
+
+.TaskEdit-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  bottom: 1em;
+  right: 1.5em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 1em;
+}
+
+.TaskEdit-footer__delete,
+.TaskEdit-footer__save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 1.5em;
+  border-radius: 1.5em;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #fff;
+  background-color: #97a3b6;
+}
+
+.TaskEdit-footer p {
+  margin-right: 0.4em;
+}
+
+.TaskEdit-footer__save {
+  background-color: #3662e3;
+}

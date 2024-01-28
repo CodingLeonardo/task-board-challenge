@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;500;600&display=swap");
 
 :root {
-  font-family: "Outfit", sans-serif;
-
   color-scheme: light dark;
 
   font-synthesis: none;
@@ -12,6 +10,7 @@
 }
 
 * {
+  font-family: "Outfit", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

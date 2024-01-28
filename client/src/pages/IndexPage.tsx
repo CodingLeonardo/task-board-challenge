@@ -1,11 +1,14 @@
+import { useState } from "react"
 import Header from "../components/Header"
 import Tasks from "../components/Tasks"
+import TaskEdit from "../components/TaskEdit"
 
 import Close from "../assets/close_ring_duotone.svg"
-
 import "./styles/IndexPage.css"
+import { createPortal } from "react-dom"
 
 const IndexPage = () => {
+  const [showModal, setShowModal] = useState(true);
   return (
     <>
       <div className="container">
@@ -20,6 +23,7 @@ const IndexPage = () => {
           </div>
         </section>
       </div>
+      { showModal && createPortal(<TaskEdit />, document.getElementById("modal")!) }
     </>
   )
 }

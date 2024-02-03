@@ -18,7 +18,7 @@
 .TaskCard-icon {
   grid-area: TaskCardIcon;
   background-color: #fff;
-  width: fit-content;
+  width: 100%;
   align-self: self-start;
 }
 
@@ -39,7 +39,7 @@
   font-weight: 400;
   margin-top: 0.5em;
   margin-bottom: 0.6em;
-  margin-right: 8em;
+  margin-right: 5em;
 }
 
 .TaskCard-status {

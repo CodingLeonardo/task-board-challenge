@@ -1,5 +1,5 @@
 .modal {
-  position: absolute;
+  position: fixed;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 1em;
@@ -230,6 +230,8 @@
   text-decoration: none;
   color: #fff;
   background-color: #97a3b6;
+  cursor: pointer;
+  border: none;
 }
 
 .TaskEdit-footer p {

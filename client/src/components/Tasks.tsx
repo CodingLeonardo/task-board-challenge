@@ -1,18 +1,20 @@
-import TaskCard from "./TaskCard"
-import { TaskCardIcon, TaskCardStatus } from "./types.d"
-
-const { inprogress, completed, wontdo } = TaskCardStatus
-const { clock, exercise, coffee } = TaskCardIcon
-
+import TaskCard from "./TaskCard";
+import {useTasks} from "../store";
 const Tasks = () => {
-  return (
-    <>
-      <TaskCard name="Task in progress" icon={clock} status={inprogress} />
-      <TaskCard name="Task completed" icon={exercise} status={completed} />
-      <TaskCard name="Task Won't Do" icon={coffee} status={wontdo} />
-      <TaskCard name="Task To Do" description="Work on a Challenge on devChallenges.io, learn TypeScript" icon={TaskCardIcon.books} />
-    </>
-  )
-}
+  const tasks = useTasks(state => state.tasks);
 
-export default Tasks
+  console.log(tasks);
+
+  return tasks.map(({name, description, icon, status}: Task) => {
+    return (
+      <TaskCard
+        name={name}
+        description={description}
+        icon={icon}
+        status={status}
+      />
+    );
+  });
+};
+
+export default Tasks;

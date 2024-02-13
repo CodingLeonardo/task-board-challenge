@@ -1,44 +1,71 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import store from "./store";
+import response from "../utils/response";
 
 class BoardController {
-  async createBoard(req: Request, res: Response): Promise<void> {
+  async createBoard(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const {id} = req.body;
-    try {
-      const newBoard = await store.createBoard(id);
-      res.json(newBoard);
-    } catch (error) {
-      res.json(error);
-    }
+
+    store
+      .createBoard(id)
+      .then(newBoard => {
+        response.success(req, res, {board: newBoard}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async getAllBoards(req: Request, res: Response): Promise<void> {
-    try {
-      const boards = await store.getAllBoards();
-      res.json(boards);
-    } catch (error) {
-      res.json(error);
-    }
+  async getAllBoards(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    store
+      .getAllBoards()
+      .then(boards => {
+        response.success(req, res, {boards}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async getBoard(req: Request, res: Response): Promise<void> {
+  async getBoard(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const {id} = req.params;
-    try {
-      const board = await store.getBoard(id);
-      res.json(board);
-    } catch (error) {
-      res.json(error);
-    }
+    store
+      .getBoard(id)
+      .then(board => {
+        response.success(req, res, {board}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async deleteBoard(req: Request, res: Response): Promise<void> {
+  async deleteBoard(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const {id} = req.params;
-    try {
-      const boardDeleted = await store.deleteBoard(id);
-      res.json(boardDeleted);
-    } catch (error) {
-      res.json(error);
-    }
+
+    store
+      .deleteBoard(id)
+      .then(boardDeleted => {
+        response.success(req, res, {board: boardDeleted}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 }
 

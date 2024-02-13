@@ -1,5 +1,6 @@
+import {Board} from "@prisma/client";
 import prisma from "../../prisma/prisma";
-import {TaskData} from "../types";
+import {BoardWithTasks, TaskData} from "../types";
 
 const initialTasks: TaskData[] = [
   {
@@ -28,46 +29,65 @@ const initialTasks: TaskData[] = [
   },
 ];
 
-const createBoard = async (id: string) => {
-  try {
-    const newBoard = await prisma.board.create({
-      data: {id: id.trim(), tasks: {create: initialTasks}},
-      include: {tasks: true},
-    });
-    return newBoard;
-  } catch (error) {
-    return error;
-  }
+const createBoard = async (id: string): Promise<Board> => {
+  return new Promise((resolve, reject) => {
+    prisma.board
+      .create({
+        data: {id: id.trim(), tasks: {create: initialTasks}},
+        include: {tasks: true},
+      })
+      .then(newBoard => {
+        resolve(newBoard);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
 
-const getAllBoards = async () => {
-  try {
-    const boards = await prisma.board.findMany();
-    return boards;
-  } catch (error) {
-    return error;
-  }
+const getAllBoards = async (): Promise<Board[]> => {
+  return new Promise((resolve, reject) => {
+    prisma.board
+      .findMany()
+      .then(boards => {
+        resolve(boards);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
 
-const getBoard = async (id: string) => {
-  try {
-    const board = await prisma.board.findUnique({
-      where: {id: id},
-      include: {tasks: true},
-    });
-    return board;
-  } catch (error) {
-    return error;
-  }
+const getBoard = async (id: string): Promise<BoardWithTasks | null> => {
+  return new Promise((resolve, reject) => {
+    prisma.board
+      .findUnique({
+        where: {id: id},
+        include: {tasks: true},
+      })
+      .then(board => {
+        resolve(board);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
 
-const deleteBoard = async (id: string) => {
-  try {
-    const boardDeleted = await prisma.board.delete({where: {id: id}});
-    return boardDeleted;
-  } catch (error) {
-    return error;
-  }
+const deleteBoard = async (id: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const deleteBoard = prisma.board.delete({where: {id: id}});
+    const deleteTasks = prisma.task.deleteMany({where: {id_board: id}});
+
+    prisma
+      .$transaction([deleteTasks, deleteBoard])
+      .then(() => {
+        resolve("Delete successfull id " + id);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 };
 
 export default {

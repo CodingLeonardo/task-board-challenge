@@ -4,6 +4,7 @@ import cors from "cors";
 
 import taskRouter from "./task/network";
 import boardRouter from "./board/network";
+import handleErrors from "./utils/handleErrors";
 
 // Server Class
 class Server {
@@ -28,6 +29,7 @@ class Server {
   public routes(): void {
     this.app.use("/api/board", boardRouter);
     this.app.use("/api/task", taskRouter);
+    this.app.use(handleErrors);
   }
 
   public async start(): Promise<void> {

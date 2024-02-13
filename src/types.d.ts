@@ -5,3 +5,9 @@ const taskData = Prisma.validator<Prisma.TaskDefaultArgs>()({
 });
 
 type TaskData = Prisma.TaskGetPayload<typeof taskData>;
+
+type BoardWithTasks = Prisma.BoardGetPayload<{
+  include: {
+    tasks: true;
+  };
+}>;

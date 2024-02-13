@@ -1,54 +1,80 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import store from "./store";
+import response from "../utils/response";
 import {TaskData} from "../types";
 
 class TaskController {
-  async createTask(req: Request, res: Response): Promise<void> {
+  async createTask(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const task: TaskData = req.body;
     const {id_board} = req.params;
-    try {
-      const newTask = await store.createTask(id_board, task);
-      res.json(newTask);
-    } catch (error) {
-      res.json(error);
-    }
+
+    store
+      .createTask(id_board, task)
+      .then(newTask => {
+        response.success(req, res, {task: newTask}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async getTask(req: Request, res: Response): Promise<void> {
+  async getTask(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const id_board = req.params.id_board;
     const id = Number(req.params.id);
 
-    console.log(id_board, id);
-
-    try {
-      const task = await store.getTask(id_board, id);
-      res.json(task);
-    } catch (error) {
-      res.json(error);
-    }
+    store
+      .getTask(id_board, id)
+      .then(task => {
+        response.success(req, res, {task}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async updateTask(req: Request, res: Response): Promise<void> {
+  async updateTask(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const id_board = req.params.id_board;
     const id = Number(req.params.id);
     const task: TaskData = req.body;
-    try {
-      const taskUpdated = await store.updateTask(id_board, id, task);
-      res.json(taskUpdated);
-    } catch (error) {
-      res.json(error);
-    }
+
+    store
+      .updateTask(id_board, id, task)
+      .then(taskUpdated => {
+        response.success(req, res, {task: taskUpdated}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 
-  async deleteTask(req: Request, res: Response): Promise<void> {
+  async deleteTask(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     const id_board = req.params.id_board;
     const id = Number(req.params.id);
-    try {
-      const taskDeleted = await store.deleteTask(id_board, id);
-      res.json(taskDeleted);
-    } catch (error) {
-      res.json(error);
-    }
+
+    store
+      .deleteTask(id_board, id)
+      .then(taskDeleted => {
+        response.success(req, res, {task: taskDeleted}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 }
 

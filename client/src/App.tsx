@@ -1,7 +1,7 @@
-import IndexPage from "./components/IndexPage";
+import Board from "./components/Board";
 
 const App = () => {
-  return <IndexPage />;
+  return <Board />;
 };
 
 export default App;

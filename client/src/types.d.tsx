@@ -13,9 +13,9 @@ export enum TaskStatus {
   wontdo = "wontdo",
 }
 
-export type Task = {
+export interface Task {
   name: string;
   description?: string;
   icon: TaskIcon;
   status?: TaskStatus;
-};
+}

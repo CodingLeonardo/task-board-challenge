@@ -1,13 +1,16 @@
+import {FC} from "react";
 import TaskCard from "./TaskCard";
-import {useTasks} from "../store";
-const Tasks = () => {
-  const tasks = useTasks(state => state.tasks);
+import {Task} from "../types.d";
 
-  console.log(tasks);
+interface TasksProps {
+  tasks: Task[];
+}
 
-  return tasks.map(({name, description, icon, status}: Task) => {
+const Tasks: FC<TasksProps> = ({tasks}) => {
+  return tasks.map(({name, description, icon, status}, key) => {
     return (
       <TaskCard
+        key={key}
         name={name}
         description={description}
         icon={icon}

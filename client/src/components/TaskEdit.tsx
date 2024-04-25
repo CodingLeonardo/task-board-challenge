@@ -12,8 +12,6 @@ import Done1 from "../assets/Done_round.svg";
 import Close from "../assets/close_ring_duotone.svg";
 import Thrash from "../assets/Trash.svg";
 
-import "./styles/TaskEdit.css";
-
 const TaskSchema = z.object({
   name: z.string().min(10).max(25),
   description: z.string().max(255),
@@ -38,99 +36,132 @@ const TaskEdit = () => {
 
   return (
     <Modal>
-      <form className="TaskEdit" onSubmit={handleSubmit(onSubmit)}>
-        <div className="TaskEdit-header">
-          <h2 className="TaskEdit-header__title">Task details</h2>
-          <div className="TaskEdit-header__close" onClick={closeModal}>
+      <form
+        className="relative bg-white-default col-start-2 px-6 py-4 rounded-xl"
+        onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-medium">Task details</h2>
+          <div
+            className="flex items-center justify-center border border-gray-light p-2 rounded-lg cursor-pointer"
+            onClick={closeModal}>
             <img src={Close1} alt="Close" />
           </div>
         </div>
-        <div className="TaskEdit-name">
-          <label htmlFor="name">Task name</label>
+        <div className="flex flex-col mt-4">
+          <label
+            className="text-gray-steel text-xs font-medium mb-2"
+            htmlFor="name">
+            Task name
+          </label>
           <input
+            className="bg-white-default text-gray-steel text-lg py-2 px-4 border-2 border-gray-light rounded-lg outline-none"
             type="text"
             placeholder="Enter a task name"
             {...register("name")}
           />
         </div>
-        <div className="TaskEdit-description">
-          <label htmlFor="description">Description</label>
+        <div className="flex flex-col mt-4">
+          <label
+            className="text-gray-steel text-xs font-medium mb-2"
+            htmlFor="description">
+            Description
+          </label>
           <textarea
+            className="bg-white-default text-gray-steel text-lg py-2 px-4 border-2 border-gray-light rounded-lg outline-none"
             cols={20}
             rows={7}
             placeholder="Enter a short description"
             {...register("description")}></textarea>
         </div>
-        <div className="TaskEdit-icon">
-          <h3 className="TaskEdit-icon__title">Icon</h3>
-          <div className="TaskEdit-icon__items">
-            <div className="TaskEdit-icon__item">
+        <div className="flex flex-col mt-4">
+          <h3 className="text-gray-steel text-xs font-medium mb-2">Icon</h3>
+          <div className="flex flex-row gap-x-3">
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="person">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.person}
+                value="person"
                 id="person"
                 {...register("icon")}
               />
-              <label htmlFor="person">👨‍💻</label>
-            </div>
-            <div className="TaskEdit-icon__item">
+              👨‍💻
+            </label>
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="message">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.message}
+                value="message"
                 id="message"
                 {...register("icon")}
               />
-              <label htmlFor="message">💬</label>
-            </div>
-            <div className="TaskEdit-icon__item">
+              💬
+            </label>
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="coffee">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.coffee}
+                value="coffee"
                 id="coffee"
                 {...register("icon")}
               />
-              <label htmlFor="coffee">☕</label>
-            </div>
-            <div className="TaskEdit-icon__item">
+              ☕
+            </label>
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="exercise">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.exercise}
+                value="exercise"
                 id="exercise"
                 {...register("icon")}
               />
-              <label htmlFor="exercise">🏋️‍♀️</label>
-            </div>
-            <div className="TaskEdit-icon__item">
+              🏋️‍♀️
+            </label>
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="books">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.books}
+                value="books"
                 id="books"
                 {...register("icon")}
               />
-              <label htmlFor="books">📚</label>
-            </div>
-            <div className="TaskEdit-icon__item">
+              📚
+            </label>
+            <label
+              className="flex items-center justify-center w-12 h-12 text-xl cursor-pointer rounded-xl bg-gray-light has-[:checked]:bg-orange-cream"
+              htmlFor="clock">
               <input
+                className="appearance-none cursor-pointer"
                 type="radio"
-                value={TaskIcon.clock}
+                value="clock"
                 id="clock"
                 {...register("icon")}
               />
-              <label htmlFor="clock">⏰</label>
-            </div>
+              ⏰
+            </label>
           </div>
         </div>
-        <div className="TaskEdit-status">
-          <h3 className="TaskEdit-status__title">Status</h3>
-          <div className="TaskEdit-status__items">
+        <div className="flex flex-col mt-4">
+          <h3 className="text-gray-steel text-xs font-medium mb-2">Status</h3>
+          <div className="grid gap-2 grid-cols-2">
             <label
               htmlFor="inprogress"
-              className="TaskEdit-status__item inprogress">
-              <figure>
-                <img src={Time} alt="Time" />
+              className="w-full grid grid-cols-taskStatus items-center gap-x-3 p-1 border-2 border-gray-light rounded-2xl cursor-pointer has-[:checked]:border-blue-electric">
+              <figure className="w-fit flex justify-center items-center bg-orange-burnt rounded-xl">
+                <img className="p-3" src={Time} alt="Time" />
               </figure>
-              <h3>In Progress</h3>
+              <h3 className="text-base font-medium">In Progress</h3>
               <input
+                className="appearance-none w-7 h-7 mr-3 checked:bg-[url(/src/assets/Done_round.svg)] checked:bg-blue-electric checked:bg-[length:1.25rem] checked:bg-center checked:bg-no-repeat checked:rounded-full"
                 type="radio"
                 value="inprogress"
                 id="inprogress"
@@ -139,24 +170,28 @@ const TaskEdit = () => {
             </label>
             <label
               htmlFor="completed"
-              className="TaskEdit-status__item completed">
-              <figure>
-                <img src={Done} alt="" />
+              className="w-full grid grid-cols-taskStatus items-center gap-x-3 p-1 border-2 border-gray-light rounded-2xl cursor-pointer has-[:checked]:border-blue-electric">
+              <figure className="w-fit flex justify-center items-center bg-green-forest rounded-xl">
+                <img className="p-3" src={Done} alt="Time" />
               </figure>
-              <h3>Completed</h3>
+              <h3 className="text-base font-medium">Completed</h3>
               <input
+                className="appearance-none w-7 h-7 mr-3 checked:bg-[url(/src/assets/Done_round.svg)] checked:bg-blue-electric checked:bg-[length:1.25rem] checked:bg-center checked:bg-no-repeat checked:rounded-full"
                 type="radio"
                 value="completed"
                 id="completed"
                 {...register("status")}
               />
             </label>
-            <label htmlFor="wontdo" className="TaskEdit-status__item wontdo">
-              <figure>
-                <img src={Close} alt="" />
+            <label
+              htmlFor="wontdo"
+              className="w-full grid grid-cols-taskStatus items-center gap-x-3 p-1 border-2 border-gray-light rounded-2xl cursor-pointer has-[:checked]:border-blue-electric">
+              <figure className="w-fit flex justify-center items-center bg-red-brick rounded-xl">
+                <img className="p-3" src={Close} alt="Time" />
               </figure>
-              <h3>Won't do</h3>
+              <h3 className="text-base font-medium">Won't Do</h3>
               <input
+                className="appearance-none w-7 h-7 mr-3 checked:bg-[url(/src/assets/Done_round.svg)] checked:bg-blue-electric checked:bg-[length:1.25rem] checked:bg-center checked:bg-no-repeat checked:rounded-full"
                 type="radio"
                 value="wontdo"
                 id="wontdo"
@@ -165,12 +200,14 @@ const TaskEdit = () => {
             </label>
           </div>
         </div>
-        <div className="TaskEdit-footer">
-          <a href="#" className="TaskEdit-footer__delete">
+        <div className="absolute bottom-4 right-6 grid grid-cols-2 gap-x-4">
+          <a
+            href="#"
+            className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-gray-steel border-none cursor-pointer">
             <p>Delete</p>
             <img src={Thrash} alt="Thrash" />
           </a>
-          <button className="TaskEdit-footer__save">
+          <button className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-blue-electric border-none cursor-pointer">
             <p>Save</p>
             <img src={Done1} alt="Done" />
           </button>

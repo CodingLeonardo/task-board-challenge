@@ -5,6 +5,7 @@ export default {
     colors: {
       black: "#000000",
       white: {
+        default: "#FFFFFF",
         snow: "#F8FAFC",
         eggshell: "#F5E8D5",
       },
@@ -36,6 +37,7 @@ export default {
       },
       gridTemplateColumns: {
         header: "max-content max-content max-content",
+        taskStatus: "max-content 1fr max-content",
         taskcard: "3em 1fr 3em",
       },
     },

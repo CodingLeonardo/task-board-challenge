@@ -3,6 +3,7 @@ import TaskEdit from "./TaskEdit";
 import Layout from "./Layout";
 import TaskButton from "./TaskButton";
 import {Task, TaskIcon, TaskStatus} from "../types.d";
+// import {useModal} from "../store";
 
 const tasks: Task[] = [
   {
@@ -28,12 +29,14 @@ const tasks: Task[] = [
 ];
 
 const Board = () => {
+  // const isOpened = useModal(state => state.isOpened);
   return (
     <>
       <Layout>
         <Tasks tasks={tasks} />
         <TaskButton />
-        {/* <TaskEdit /> */}
+        {/* {isOpened && <TaskEdit />} */}
+        <TaskEdit />
       </Layout>
     </>
   );

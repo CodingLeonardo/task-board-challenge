@@ -1,4 +1,6 @@
 import {FC} from "react";
+import {clsx} from "clsx";
+import {twMerge} from "tailwind-merge";
 import {TaskStatus, Task, TaskIcon} from "../types.d";
 
 import Time from "../assets/Time_atack_duotone.svg";
@@ -38,7 +40,14 @@ const TaskCardStatusIcon: FC<TaskCardStatusIconProps> = ({status}) => {
     [TaskStatus.wontdo]: Close,
   };
   return (
-    <div className="flex justify-center items-center h-12 w-12 bg-orange-burnt rounded-xl">
+    <div
+      className={twMerge(
+        clsx("flex justify-center items-center h-12 w-12 rounded-xl", {
+          "bg-orange-burnt": status === TaskStatus.inprogress,
+          "bg-green-forest": status === TaskStatus.completed,
+          "bg-red-brick": status === TaskStatus.wontdo,
+        }),
+      )}>
       <img className="" src={statusIcons[status]} alt="TaskCard Status" />
     </div>
   );
@@ -46,7 +55,17 @@ const TaskCardStatusIcon: FC<TaskCardStatusIconProps> = ({status}) => {
 
 const TaskCard: FC<TaskCardProps> = ({name, description, icon, status}) => {
   return (
-    <div className="grid grid-cols-taskcard gap-x-4 items-center px-6 py-4 rounded-xl bg-orange-cream mb-3">
+    <div
+      className={twMerge(
+        clsx(
+          "grid grid-cols-taskcard gap-x-4 items-center px-6 py-4 rounded-xl mb-3 bg-gray-light",
+          {
+            "bg-orange-cream": status === TaskStatus.inprogress,
+            "bg-green-mint": status === TaskStatus.completed,
+            "bg-pink-blush": status === TaskStatus.wontdo,
+          },
+        ),
+      )}>
       <TaskCardIcon icon={icon} />
       <div className="pr-10">
         <h3 className="text-xl font-semibold text-black">{name}</h3>

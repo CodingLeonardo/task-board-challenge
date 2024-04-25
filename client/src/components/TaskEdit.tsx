@@ -13,6 +13,7 @@ import Close from "../assets/close_ring_duotone.svg";
 import Thrash from "../assets/Trash.svg";
 
 const TaskSchema = z.object({
+  id: z.number(),
   name: z.string().min(10).max(25),
   description: z.string().max(255),
   icon: z.nativeEnum(TaskIcon),

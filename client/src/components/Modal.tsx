@@ -1,18 +1,18 @@
 import {createPortal} from "react-dom";
 import {FC, ReactNode, useRef} from "react";
-import {useModal} from "../store";
+import {useNavigate} from "react-router-dom";
 
 interface ModalProps {
   children: ReactNode;
 }
 
 const Modal: FC<ModalProps> = ({children}) => {
-  const modalRef = useRef(null);
-  const closeModal = useModal(state => state.close);
+  const navigate = useNavigate();
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClick = event => {
     if (event.target === modalRef.current) {
-      closeModal();
+      navigate(-1);
     }
   };
 

@@ -7,16 +7,8 @@ interface TasksProps {
 }
 
 const Tasks: FC<TasksProps> = ({tasks}) => {
-  return tasks.map(({name, description, icon, status}, key) => {
-    return (
-      <TaskCard
-        key={key}
-        name={name}
-        description={description}
-        icon={icon}
-        status={status}
-      />
-    );
+  return tasks.map((props, key) => {
+    return <TaskCard key={key} {...props} />;
   });
 };
 

@@ -35,6 +35,7 @@ export enum TaskStatus {
 }
 
 export interface Task {
+  id: number;
   name: string;
   description?: string;
   icon: TaskIcon;

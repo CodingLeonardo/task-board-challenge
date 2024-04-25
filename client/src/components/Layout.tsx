@@ -1,16 +1,14 @@
-import {FC, ReactNode} from "react";
+import {Outlet} from "react-router-dom";
 import Header from "./Header";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: FC<LayoutProps> = ({children}) => {
+const Layout = () => {
   return (
     <>
       <main className="sm:w-10/12 m-auto">
         <Header title="My Task Board" description="Tasks to keep organised" />
-        <div>{children}</div>
+        <div>
+          <Outlet />
+        </div>
       </main>
     </>
   );

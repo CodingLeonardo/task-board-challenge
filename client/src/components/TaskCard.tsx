@@ -1,4 +1,5 @@
 import {FC} from "react";
+import {Link} from "react-router-dom";
 import {clsx} from "clsx";
 import {twMerge} from "tailwind-merge";
 import {TaskStatus, Task, TaskIcon} from "../types.d";
@@ -53,9 +54,10 @@ const TaskCardStatusIcon: FC<TaskCardStatusIconProps> = ({status}) => {
   );
 };
 
-const TaskCard: FC<TaskCardProps> = ({name, description, icon, status}) => {
+const TaskCard: FC<TaskCardProps> = ({id, name, description, icon, status}) => {
   return (
-    <div
+    <Link
+      to={`/${id}`}
       className={twMerge(
         clsx(
           "grid grid-cols-taskcard gap-x-4 items-center px-6 py-4 rounded-xl mb-3 bg-gray-light",
@@ -72,7 +74,7 @@ const TaskCard: FC<TaskCardProps> = ({name, description, icon, status}) => {
         {description && <p className="text-base">{description}</p>}
       </div>
       {status && <TaskCardStatusIcon status={status} />}
-    </div>
+    </Link>
   );
 };
 

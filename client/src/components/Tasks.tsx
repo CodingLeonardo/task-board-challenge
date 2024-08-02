@@ -1,6 +1,6 @@
 import {FC} from "react";
 import TaskCard from "./TaskCard";
-import {Task} from "../types.d";
+import {Task} from "../types/task";
 
 interface TasksProps {
   tasks: Task[];

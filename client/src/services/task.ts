@@ -52,3 +52,16 @@ export const updateTask = async ({
   });
   return response.json();
 };
+
+export const deleteTask = async ({
+  boardId,
+  taskId,
+}: {
+  boardId: string;
+  taskId: number;
+}) => {
+  const response = await fetch(`${API_URL}/api/task/${boardId}/${taskId}`, {
+    method: "DELETE",
+  });
+  return response.json();
+};

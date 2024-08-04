@@ -1,9 +1,9 @@
-import {Outlet, useLoaderData} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import Tasks from "../../components/Tasks";
 import TaskButton from "../../components/TaskButton";
-// import {Task, TaskIcon, TaskStatus} from "../../types/task";
-import {Board as BoardInterface} from "../../types/task";
-// import {useModal} from "../store";
+import {useEffect, useRef} from "react";
+import {getBoard} from "../../services/board";
+import {useBoardStore} from "../../store/boardStore";
 
 // const tasks: Task[] = [
 //   {
@@ -33,14 +33,24 @@ import {Board as BoardInterface} from "../../types/task";
 // ];
 
 const Board = () => {
-  const {board} = useLoaderData() as {board: BoardInterface};
+  const {boardId} = useParams();
+  const {id, setBoard} = useBoardStore();
 
-  const {tasks} = board;
+  const tasks = useBoardStore(state => state.tasks);
+
+  const tasksRef = useRef(tasks);
+
+  useEffect(() => {
+    if (!boardId) return;
+    getBoard(boardId).then(({body: {board}}) => {
+      setBoard(board);
+    });
+  }, [tasksRef, boardId, setBoard]);
 
   return (
     <>
       <Tasks tasks={tasks} />
-      <TaskButton boardId={board.id} />
+      <TaskButton boardId={id} />
       <Outlet />
     </>
   );

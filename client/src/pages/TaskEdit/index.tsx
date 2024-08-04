@@ -2,6 +2,7 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 import Modal from "../../components/Modal";
+import {useBoardStore} from "../../store/boardStore";
 import {Task, TaskIcon, TaskStatus} from "../../types/task";
 
 import Close1 from "../../assets/close_ring_duotone-1.svg";
@@ -10,8 +11,8 @@ import Done from "../../assets/Done_round_duotone.svg";
 import Done1 from "../../assets/Done_round.svg";
 import Close from "../../assets/close_ring_duotone.svg";
 import Thrash from "../../assets/Trash.svg";
-import {useLoaderData, useParams, useNavigate} from "react-router-dom";
-import {createTask, updateTask} from "../../services/task";
+import {Form, useLoaderData, useParams, useNavigate} from "react-router-dom";
+import {createTask, updateTask, deleteTask} from "../../services/task";
 import TaskIconField from "../../components/ui/TaskIconField";
 import TaskStatusField from "../../components/ui/TaskStatusField";
 
@@ -35,27 +36,33 @@ const TaskSchema = z.object({
 type TaskSchemaType = z.infer<typeof TaskSchema>;
 
 const TaskEdit = () => {
-  const {boardId} = useParams();
+  const {boardId, taskId} = useParams();
   const {task} = useLoaderData() as {task: Task};
   const navigate = useNavigate();
+  const {addTask, editTask, removeTask} = useBoardStore();
 
-  const {register, handleSubmit, watch} = useForm<TaskSchemaType>({
+  const {register, handleSubmit} = useForm<TaskSchemaType>({
     resolver: zodResolver(TaskSchema),
     defaultValues: task,
   });
 
   const onSubmit: SubmitHandler<TaskSchemaType> = data => {
-    const {id_board, id, ...restTask} = data;
+    const {name, description, icon, status} = data;
+    const task: Task = {name, description, icon, status};
     if (boardId) {
-      console.log(boardId);
       console.log(data);
-      if (!task) {
+      if (!taskId) {
         console.log("modo Create");
-        createTask({boardId: boardId, task: data});
+        createTask({boardId: boardId, task: data}).then(() => {
+          addTask(data);
+        });
         return;
-      }
-      if (id) {
-        updateTask({boardId: boardId, taskId: id, task: restTask});
+      } else {
+        updateTask({boardId: boardId, taskId: Number(taskId), task: task}).then(
+          () => {
+            editTask(Number(taskId), task);
+          },
+        );
         console.log("modo Edit");
       }
       setTimeout(() => {
@@ -64,13 +71,26 @@ const TaskEdit = () => {
     }
   };
 
+  const handleDelete = event => {
+    event.preventDefault();
+    if (!boardId || !taskId) {
+      return;
+    }
+    deleteTask({boardId: boardId, taskId: Number(taskId)}).then(() => {
+      removeTask(Number(taskId));
+    });
+    setTimeout(() => {
+      navigate(`/${boardId}`);
+    }, 1000);
+  };
+
   // const watchFields = watch(["icon", "status", "name", "description"]);
   // console.log(watchFields);
   // console.log(formState.errors);
 
   return (
     <Modal>
-      <form
+      <Form
         className="relative bg-white-default col-start-2 px-6 py-4 rounded-xl"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="flex justify-between items-center">
@@ -150,18 +170,18 @@ const TaskEdit = () => {
           </div>
         </div>
         <div className="absolute bottom-4 right-6 grid grid-cols-2 gap-x-4">
-          <a
-            href="#"
+          <button
+            onClick={handleDelete}
             className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-gray-steel border-none cursor-pointer">
             <p>Delete</p>
             <img src={Thrash} alt="Thrash" />
-          </a>
+          </button>
           <button className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-blue-electric border-none cursor-pointer">
             <p>Save</p>
             <img src={Done1} alt="Done" />
           </button>
         </div>
-      </form>
+      </Form>
     </Modal>
   );
 };

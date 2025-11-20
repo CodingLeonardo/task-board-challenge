@@ -39,6 +39,7 @@ const TaskCardStatusIcon: FC<TaskCardStatusIconProps> = ({status}) => {
     [TaskStatus.inprogress]: Time,
     [TaskStatus.completed]: Done,
     [TaskStatus.wontdo]: Close,
+    [TaskStatus.none]: "",
   };
   return (
     <div

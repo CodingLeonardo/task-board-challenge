@@ -13,6 +13,7 @@ const TaskStatusField = forwardRef<HTMLInputElement, TaskStatusFieldProps>(
       [TaskStatus.inprogress]: "In Progress",
       [TaskStatus.completed]: "Completed",
       [TaskStatus.wontdo]: "Won't Do",
+      [TaskStatus.none]: "None",
     };
     return (
       <>

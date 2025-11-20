@@ -10,7 +10,7 @@ const Modal: FC<ModalProps> = ({children}) => {
   const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = event => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === modalRef.current) {
       navigate(-1);
     }

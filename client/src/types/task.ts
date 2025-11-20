@@ -25,4 +25,5 @@ export enum TaskStatus {
   inprogress = "inprogress",
   completed = "completed",
   wontdo = "wontdo",
+  none = "",
 }

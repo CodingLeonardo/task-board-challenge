@@ -58,9 +58,10 @@ const TaskEdit = () => {
         });
         return;
       } else {
+        const editedTask = {id: Number(taskId), id_board: boardId, ...task};
         updateTask({boardId: boardId, taskId: Number(taskId), task: task}).then(
           () => {
-            editTask(Number(taskId), task);
+            editTask(Number(taskId), editedTask);
           },
         );
         console.log("modo Edit");
@@ -71,7 +72,7 @@ const TaskEdit = () => {
     }
   };
 
-  const handleDelete = event => {
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (!boardId || !taskId) {
       return;
@@ -82,6 +83,10 @@ const TaskEdit = () => {
     setTimeout(() => {
       navigate(`/${boardId}`);
     }, 1000);
+  };
+
+  const handleClose = () => {
+    navigate(-1);
   };
 
   // const watchFields = watch(["icon", "status", "name", "description"]);
@@ -95,7 +100,9 @@ const TaskEdit = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-medium">Task details</h2>
-          <div className="flex items-center justify-center border border-gray-light p-2 rounded-lg cursor-pointer">
+          <div
+            className="flex items-center justify-center border border-gray-light p-2 rounded-lg cursor-pointer"
+            onClick={handleClose}>
             <img src={Close1} alt="Close" />
           </div>
         </div>
@@ -167,6 +174,13 @@ const TaskEdit = () => {
             <TaskStatusField field={TaskStatus.wontdo} {...register("status")}>
               <img className="p-3" src={Close} alt="Close" />
             </TaskStatusField>
+            <input
+              className="hidden"
+              type="radio"
+              value={TaskStatus.none}
+              id="none"
+              {...register("status")}
+            />
           </div>
         </div>
         <div className="absolute bottom-4 right-6 grid grid-cols-2 gap-x-4">

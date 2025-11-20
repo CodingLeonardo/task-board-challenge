@@ -29,11 +29,20 @@ const initialTasks: TaskData[] = [
   },
 ];
 
-const createBoard = async (id: string): Promise<Board> => {
+const createBoard = async (
+  id: string,
+  name: string,
+  description: string,
+): Promise<Board> => {
   return new Promise((resolve, reject) => {
     prisma.board
       .create({
-        data: {id: id.trim(), tasks: {create: initialTasks}},
+        data: {
+          id: id.trim(),
+          name: name,
+          description: description,
+          tasks: {create: initialTasks},
+        },
         include: {tasks: true},
       })
       .then(newBoard => {
@@ -90,9 +99,26 @@ const deleteBoard = async (id: string): Promise<string> => {
   });
 };
 
+const updateBoard = async (
+  id: string,
+  data: {name?: string; description?: string},
+): Promise<BoardWithTasks | null> => {
+  return new Promise((resolve, reject) => {
+    prisma.board
+      .update({
+        where: {id},
+        data: {name: data.name, description: data.description},
+        include: {tasks: true},
+      })
+      .then(board => resolve(board))
+      .catch(err => reject(err));
+  });
+};
+
 export default {
   createBoard,
   getAllBoards,
   getBoard,
   deleteBoard,
+  updateBoard,
 };

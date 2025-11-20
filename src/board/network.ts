@@ -15,6 +15,7 @@ class BoardRouter {
     this.router.post("/", this.controller.createBoard);
     this.router.get("/", this.controller.getAllBoards);
     this.router.get("/:id", this.controller.getBoard);
+    this.router.patch("/:id", this.controller.updateBoard);
     this.router.delete("/:id", this.controller.deleteBoard);
   }
 }

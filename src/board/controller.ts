@@ -8,10 +8,10 @@ class BoardController {
     res: Response,
     next: NextFunction,
   ): Promise<void> {
-    const {id} = req.body;
+    const {id, name, description} = req.body;
 
     store
-      .createBoard(id)
+      .createBoard(id, name, description)
       .then(newBoard => {
         response.success(req, res, {board: newBoard}, 200);
       })
@@ -62,6 +62,24 @@ class BoardController {
       .deleteBoard(id)
       .then(boardDeleted => {
         response.success(req, res, {board: boardDeleted}, 200);
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+
+  async updateBoard(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const {id} = req.params;
+    const {name, description} = req.body;
+
+    store
+      .updateBoard(id, {name, description})
+      .then(updated => {
+        response.success(req, res, {board: updated}, 200);
       })
       .catch(err => {
         next(err);

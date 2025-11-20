@@ -11,3 +11,15 @@ export const getBoard = async (boardId: string) => {
   const response = await fetch(`${API_URL}/api/board/${boardId}`);
   return response.json();
 };
+
+export const updateBoard = async (
+  boardId: string,
+  data: {name?: string; description?: string},
+) => {
+  const response = await fetch(`${API_URL}/api/board/${boardId}`, {
+    method: "PATCH",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};

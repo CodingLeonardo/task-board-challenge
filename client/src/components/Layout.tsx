@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <>
       <main className="sm:w-10/12 m-auto">
-        <Header title="My Task Board" description="Tasks to keep organised" />
+        <Header />
         <div>
           <Outlet />
         </div>

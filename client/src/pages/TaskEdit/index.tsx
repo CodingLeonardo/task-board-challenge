@@ -96,7 +96,7 @@ const TaskEdit = () => {
   return (
     <Modal>
       <Form
-        className="relative bg-white-default col-start-2 px-6 py-4 rounded-xl"
+        className="relative bg-white-default col-start-1 md:col-start-2 md:col-end-4 lg:col-start-2 px-6 py-4 rounded-xl"
         onSubmit={handleSubmit(onSubmit)}>
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-medium">Task details</h2>

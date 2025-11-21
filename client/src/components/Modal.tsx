@@ -19,7 +19,7 @@ const Modal: FC<ModalProps> = ({children}) => {
   return createPortal(
     <div
       ref={modalRef}
-      className="fixed grid grid-cols-2 p-4 left-0 top-0 bg-[rgba(0,0,0,0.3)] w-screen h-screen"
+      className="fixed grid p-4 left-0 top-0 bg-[rgba(0,0,0,0.3)] w-screen h-screen sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-2"
       onClick={handleClick}>
       {children}
     </div>,

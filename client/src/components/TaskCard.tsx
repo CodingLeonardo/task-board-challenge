@@ -68,7 +68,7 @@ const TaskCard: FC<TaskCardProps> = ({
       to={`/${id_board}/${id}`}
       className={twMerge(
         clsx(
-          "grid grid-cols-taskcard gap-x-4 items-center px-6 py-4 rounded-xl mb-3 bg-gray-light",
+          "grid grid-cols-taskcard gap-x-4 items-center px-6 py-4 rounded-xl mb-3 sm:mb-5 bg-gray-light",
           {
             "bg-orange-cream": status === TaskStatus.inprogress,
             "bg-green-mint": status === TaskStatus.completed,

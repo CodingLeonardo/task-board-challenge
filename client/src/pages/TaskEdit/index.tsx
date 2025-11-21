@@ -184,13 +184,15 @@ const TaskEdit = () => {
           </div>
         </div>
         <div className="absolute bottom-4 right-6 grid grid-cols-2 gap-x-4">
-          <button
-            onClick={handleDelete}
-            className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-gray-steel border-none cursor-pointer">
-            <p>Delete</p>
-            <img src={Thrash} alt="Thrash" />
-          </button>
-          <button className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-blue-electric border-none cursor-pointer">
+          {taskId && (
+            <button
+              onClick={handleDelete}
+              className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-gray-steel border-none cursor-pointer">
+              <p>Delete</p>
+              <img src={Thrash} alt="Thrash" />
+            </button>
+          )}
+          <button className="flex justify-center items-center gap-x-2 py-2 px-6 rounded-3xl text-sm font-normal no-underline text-white-default bg-blue-electric border-none cursor-pointer col-start-2">
             <p>Save</p>
             <img src={Done1} alt="Done" />
           </button>

@@ -8,6 +8,7 @@ This is a solution to the [My Task Board on DevChallenges.io](https://devchallen
 - [Features](#features)
 - [Project Architecture](#project-architecture)
 - [Technologies](#technologies)
+- [Screenshots](#screenshots)
 - [Local Installation and Execution](#local-installation-and-execution)
 - [Important API Endpoints](#important-api-endpoints)
 - [Contributions](#contributions)
@@ -37,7 +38,8 @@ Main structure (summary):
 - `client/src/store/boardStore.ts` uses `zustand` for local board state.
 - `src/`: Express server with controllers, routes, and database access via Prisma.
 - `src/board/` and `src/task/` contain server controllers and stores.
-- `src/board/network.ts` defines REST routes such as `POST /api/board/`, `GET /api/board/:id`, `PATCH /api/board/:id`, `DELETE /api/board/:id`, etc. The `src/task/network.ts` file defines REST routes such as `POST /api/task/:id_board`, `GET /api/task/:id_board/:id`, `PUT /api/task/:id_board/:id`, `DELETE /api/task/:id_board/:id`, etc.
+- `src/board/network.ts` defines REST routes such as `POST /api/board/`, `GET /api/board/:id`, `PATCH /api/board/:id`, `DELETE /api/board/:id`, etc.
+- `src/task/network.ts` defines REST routes such as `POST /api/task/:id_board`, `GET /api/task/:id_board/:id`, `PUT /api/task/:id_board/:id`, `DELETE /api/task/:id_board/:id`, etc.
 
 This separation allows you to deploy the frontend as a static site and expose the API separately (or as serverless functions) depending on your implementation strategy.
 
@@ -51,13 +53,9 @@ This separation allows you to deploy the frontend as a static site and expose th
 
 ## Screenshots
 
-### Board Page
-
-![](./screenshots/board-page.png)
-
-### Task Editing
-
-![](./screenshots/task-edit.png)
+|                       Board Page                       |                      Task Editing                       |
+| :----------------------------------------------------: | :-----------------------------------------------------: |
+| ![Board Page Screenshot](./screenshots/board-page.png) | ![Task Editing Screenshot](./screenshots/task-edit.png) |
 
 ## Local Installation and Execution
 
@@ -91,14 +89,14 @@ pnpm prisma migrate deploy
 4. Run the server in development mode (from the root directory):
 
 ```tap
-pnpm developer
+pnpm dev
 ```
 
 5. Run the client (in another terminal):
 
 ```tap
-pnpm client CD
-pnpm Developer
+cd client
+pnpm dev
 ```
 
 6. Open the application in your browser (e.g., `http://localhost:5173`) and navigate the board.
@@ -121,7 +119,7 @@ Example of a request to update the board from the client:
 PATCH /api/board/<boardId>
 Content type: application/json
 
-{ "name": "New name", "description": "New description" }
+{ "name": "My Task Board", "description": "Tasks to keep organised" }
 ```
 
 ## Contributions
@@ -132,9 +130,8 @@ If you want to contribute:
 2. Create a branch of features and open a Pull Request.
 3. Run and test the changes locally before submitting.
 
-## Autor
+## Author
 
-Website - [Leonardo Rivero](https://codingleonardo.github.io/)
-
+- Website - [Leonardo Rivero](https://codingleonardo.github.io/)
 - DevChallenges.io - [@CodingLeonardo](https://devchallenges.io/profile/8c0bdef8-0f64-4c92-8640-bcae8d05fb4b)
 - Twitter - [@CodingLeonardo](https://www.twitter.com/CodingLeonardo)
